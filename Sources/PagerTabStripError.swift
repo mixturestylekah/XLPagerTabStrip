@@ -24,6 +24,6 @@
 
 import Foundation
 
-public enum PagerTabStripError: ErrorType {
-    case ViewControllerNotContainedInPagerTabStrip
+public enum PagerTabStripError: ErrorProtocol {
+    case viewControllerNotContainedInPagerTabStrip
 }

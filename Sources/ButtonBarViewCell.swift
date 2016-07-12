@@ -29,14 +29,14 @@ public class ButtonBarViewCell: UICollectionViewCell {
     @IBOutlet public var imageView: UIImageView!
     @IBOutlet public lazy var label: UILabel! = { [unowned self] in
         let label = UILabel(frame: self.contentView.bounds)
-        label.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        label.textAlignment = .Center
-        label.font = UIFont.boldSystemFontOfSize(14.0)
+        label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 14.0)
         return label
     }()
     
-    public override func willMoveToSuperview(newSuperview: UIView?) {
-        super.willMoveToSuperview(newSuperview)
+    public override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
         
         if label.superview != nil {
             contentView.addSubview(label)

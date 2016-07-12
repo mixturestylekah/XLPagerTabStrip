@@ -40,16 +40,16 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController, 
     
     public var settings = SegmentedPagerTabStripSettings()
     
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        pagerBehaviour = PagerTabStripBehaviour.Common(skipIntermediateViewControllers: true)
+        pagerBehaviour = PagerTabStripBehaviour.common(skipIntermediateViewControllers: true)
         delegate = self
         datasource = self
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        pagerBehaviour = PagerTabStripBehaviour.Common(skipIntermediateViewControllers: true)
+        pagerBehaviour = PagerTabStripBehaviour.common(skipIntermediateViewControllers: true)
         delegate = self
         datasource = self
     }
@@ -62,7 +62,7 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController, 
             navigationItem.titleView = segmentedControl
         }
         segmentedControl.tintColor = settings.style.segmentedControlColor ?? segmentedControl.tintColor
-        segmentedControl.addTarget(self, action: #selector(SegmentedPagerTabStripViewController.segmentedControlChanged(_:)), forControlEvents: .ValueChanged)
+        segmentedControl.addTarget(self, action: #selector(SegmentedPagerTabStripViewController.segmentedControlChanged(_:)), for: .valueChanged)
         reloadSegmentedControl()
     }
     
@@ -75,28 +75,28 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController, 
     
     func reloadSegmentedControl() {
         segmentedControl.removeAllSegments()
-        for (index, item) in viewControllers.enumerate(){
+        for (index, item) in viewControllers.enumerated(){
             let child = item as! IndicatorInfoProvider
-            if let image = child.indicatorInfoForPagerTabStrip(self).image {
-                segmentedControl.insertSegmentWithImage(image, atIndex: index, animated: false)
+            if let image = child.indicatorInfo(for: self).image {
+                segmentedControl.insertSegment(with: image, at: index, animated: false)
             }
             else {
-                segmentedControl.insertSegmentWithTitle(child.indicatorInfoForPagerTabStrip(self).title, atIndex: index, animated: false)
+                segmentedControl.insertSegment(withTitle: child.indicatorInfo(for: self).title, at: index, animated: false)
             }
         }
         segmentedControl.selectedSegmentIndex = currentIndex
     }
     
-    func segmentedControlChanged(sender: UISegmentedControl) {
+    func segmentedControlChanged(_ sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
-        pagerTabStripViewController(self, updateIndicatorFromIndex: currentIndex, toIndex: index)
+        pagerTabStripViewController(self, updateIndicatorFrom: currentIndex, to: index)
         shouldUpdateSegmentedControl = false
-        moveToViewControllerAtIndex(index)
+        moveToViewController(at: index)
     }
     
     // MARK: - PagerTabStripDelegate
     
-    public func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) {
+    public func pagerTabStripViewController(_ pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFrom fromIndex: Int, to toIndex: Int) {
         if shouldUpdateSegmentedControl {
             segmentedControl.selectedSegmentIndex = toIndex
         }
@@ -104,7 +104,7 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController, 
     
     // MARK: - UIScrollViewDelegate
     
-    public override func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+    public override func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         super.scrollViewDidEndScrollingAnimation(scrollView)
         shouldUpdateSegmentedControl = true
     }
