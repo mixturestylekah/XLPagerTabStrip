@@ -46,7 +46,7 @@ class ChildExampleViewController: UIViewController, IndicatorInfoProvider {
         label.text = "XLPagerTabStrip"
         
         view.addSubview(label)
-        view.backgroundColor = .white()
+        view.backgroundColor = .white
         
         view.addConstraint(NSLayoutConstraint(item: label, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: label, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: -50))

@@ -34,8 +34,8 @@ class ReloadExampleViewController: UIViewController {
     
     lazy var bigLabel: UILabel = {
         let bigLabel = UILabel()
-        bigLabel.backgroundColor = .clear()
-        bigLabel.textColor = .white()
+        bigLabel.backgroundColor = .clear
+        bigLabel.textColor = .white
         bigLabel.font = UIFont.boldSystemFont(ofSize: 20)
         bigLabel.adjustsFontSizeToFitWidth = true
         return bigLabel
@@ -81,7 +81,7 @@ class ReloadExampleViewController: UIViewController {
         navigationItem.titleView?.sizeToFit()
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 }

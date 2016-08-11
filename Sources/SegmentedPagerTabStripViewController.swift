@@ -68,7 +68,7 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController, 
     
     public override func reloadPagerTabStripView() {
         super.reloadPagerTabStripView()
-        if isViewLoaded() {
+        if isViewLoaded {
             reloadSegmentedControl()
         }
     }

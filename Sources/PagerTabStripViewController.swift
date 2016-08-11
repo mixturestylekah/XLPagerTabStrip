@@ -123,7 +123,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
     }
     
     public func moveToViewController(at index: Int, animated: Bool = true) {
-        guard isViewLoaded() && view.window != nil else {
+        guard isViewLoaded && view.window != nil else {
             currentIndex = index
             return
         }
@@ -161,7 +161,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
     //MARK: - Helpers
     
     public func updateIfNeeded() {
-        if isViewLoaded() && !lastSize.equalTo(containerView.bounds.size){
+        if isViewLoaded && !lastSize.equalTo(containerView.bounds.size){
             updateContent()
         }
     }
@@ -180,7 +180,8 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
     
     public func offsetForChildViewController(_ viewController: UIViewController) throws -> CGFloat{
         guard let index = viewControllers.index(of: viewController) else {
-            throw PagerTabStripError.viewControllerNotContainedInPagerTabStrip
+//            return 0
+            throw PagerTabStripError.viewControllerNotContainedInPagerTabStrip // PagerTabStripError.viewControllerNotContainedInPagerTabStrip
         }
         return offsetForChildIndex(index)
     }
@@ -259,7 +260,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
     }
         
     public func reloadPagerTabStripView() {
-        guard isViewLoaded() else { return }
+        guard isViewLoaded else { return }
         for childController in viewControllers {
             if let _ = childController.parent {
                 childController.view.removeFromSuperview()

@@ -35,7 +35,7 @@ class BarExampleViewController: BarPagerTabStripViewController {
     override func viewDidLoad() {
         
         // set up style before super view did load is executed
-        settings.style.selectedBarBackgroundColor = .orange()
+        settings.style.selectedBarBackgroundColor = .orange
         // - 
         
         super.viewDidLoad()

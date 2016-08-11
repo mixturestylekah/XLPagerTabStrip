@@ -32,7 +32,7 @@ class SegmentedExampleViewController: SegmentedPagerTabStripViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         // change segmented style
-        settings.style.segmentedControlColor = .white()
+        settings.style.segmentedControlColor = .white
     }
     
     // MARK: - PagerTabStripDataSource

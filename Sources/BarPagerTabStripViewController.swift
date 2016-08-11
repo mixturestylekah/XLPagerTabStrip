@@ -42,8 +42,8 @@ public class BarPagerTabStripViewController: PagerTabStripViewController, PagerT
     @IBOutlet lazy public var barView: BarView! = { [unowned self] in
         let barView = BarView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.settings.style.barHeight))
         barView.autoresizingMask = .flexibleWidth
-        barView.backgroundColor = .black()
-        barView.selectedBar.backgroundColor = .white()
+        barView.backgroundColor = .black
+        barView.selectedBar.backgroundColor = .white
         return barView
     }()
     
@@ -77,7 +77,7 @@ public class BarPagerTabStripViewController: PagerTabStripViewController, PagerT
     public override func reloadPagerTabStripView() {
         super.reloadPagerTabStripView()
         barView.optionsCount = viewControllers.count
-        if isViewLoaded(){
+        if isViewLoaded{
             barView.moveToIndex(index: currentIndex, animated: false)
         }
     }

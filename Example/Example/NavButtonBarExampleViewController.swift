@@ -30,8 +30,8 @@ class NavButtonBarExampleViewController: ButtonBarPagerTabStripViewController {
     
     override func viewDidLoad() {
         // set up style before super view did load is executed
-        settings.style.buttonBarBackgroundColor = .clear()
-        settings.style.selectedBarBackgroundColor = .orange()
+        settings.style.buttonBarBackgroundColor = .clear
+        settings.style.selectedBarBackgroundColor = .orange
         //-
         super.viewDidLoad()
         
@@ -42,7 +42,7 @@ class NavButtonBarExampleViewController: ButtonBarPagerTabStripViewController {
             guard changeCurrentIndex == true else { return }
             
             oldCell?.label.textColor = UIColor(white: 1, alpha: 0.6)
-            newCell?.label.textColor = .white()
+            newCell?.label.textColor = .white
             
             if animated {
                 UIView.animate(withDuration: 0.1, animations: { () -> Void in
@@ -100,6 +100,6 @@ class NavButtonBarExampleViewController: ButtonBarPagerTabStripViewController {
     
     override func configure(cell: ButtonBarViewCell, indicatorInfo: IndicatorInfo) {
         super.configure(cell: cell, indicatorInfo: indicatorInfo)
-        cell.backgroundColor = .clear()
+        cell.backgroundColor = .clear
     }
 }

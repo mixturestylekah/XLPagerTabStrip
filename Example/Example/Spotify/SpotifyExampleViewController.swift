@@ -40,7 +40,7 @@ public class SpotifyExampleViewController: ButtonBarPagerTabStripViewController 
         settings.style.buttonBarItemFont = UIFont(name: "HelveticaNeue-Light", size:14) ?? UIFont.systemFont(ofSize: 14)
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarMinimumLineSpacing = 0
-        settings.style.buttonBarItemTitleColor = .black()
+        settings.style.buttonBarItemTitleColor = .black
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
         
         settings.style.buttonBarLeftContentInset = 20
@@ -49,7 +49,7 @@ public class SpotifyExampleViewController: ButtonBarPagerTabStripViewController 
         changeCurrentIndexProgressive = { (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
             oldCell?.label.textColor = UIColor(red: 138/255.0, green: 138/255.0, blue: 144/255.0, alpha: 1.0)
-            newCell?.label.textColor = .white()
+            newCell?.label.textColor = .white
         }
         super.viewDidLoad()
     }

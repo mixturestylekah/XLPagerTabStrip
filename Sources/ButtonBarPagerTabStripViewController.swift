@@ -48,7 +48,7 @@ public struct ButtonBarPagerTabStripSettings {
         public var buttonBarLeftContentInset: CGFloat?
         public var buttonBarRightContentInset: CGFloat?
 
-        public var selectedBarBackgroundColor = UIColor.black()
+        public var selectedBarBackgroundColor = UIColor.black
         public var selectedBarHeight: CGFloat = 5
         
         public var buttonBarItemBackgroundColor: UIColor?
@@ -73,7 +73,7 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = self?.settings.style.buttonBarItemFont
         label.text = childItemInfo.title
-        let labelSize = label.intrinsicContentSize()
+        let labelSize = label.intrinsicContentSize
         return labelSize.width + (self?.settings.style.buttonBarItemLeftRightMargin ?? 8) * 2
     })
     
@@ -85,8 +85,8 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         flowLayout.scrollDirection = .horizontal
         let buttonBarHeight = self.settings.style.buttonBarHeight ?? 44
         let buttonBar = ButtonBarView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: buttonBarHeight), collectionViewLayout: flowLayout)
-        buttonBar.backgroundColor = .orange()
-        buttonBar.selectedBar.backgroundColor = .black()
+        buttonBar.backgroundColor = .orange
+        buttonBar.selectedBar.backgroundColor = .black
         buttonBar.autoresizingMask = .flexibleWidth
         var newContainerViewFrame = self.containerView.frame
         newContainerViewFrame.origin.y = buttonBarHeight
@@ -178,7 +178,7 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
     
     public override func reloadPagerTabStripView() {
         super.reloadPagerTabStripView()
-        guard isViewLoaded() else { return }
+        guard isViewLoaded else { return }
         buttonBarView.reloadData()
         cachedCellWidths = calculateWidths()
         buttonBarView.moveToIndex(currentIndex, animated: false, swipeDirection: .none, pagerScroll: .yes)

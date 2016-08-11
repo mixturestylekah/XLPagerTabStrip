@@ -48,7 +48,7 @@ class PostCell: UITableViewCell {
         userImage?.layer.cornerRadius = 30.0
         postText.text = nil
         postName.font = UIFont(name: "HelveticaNeue-Light", size:18) ?? UIFont.systemFont(ofSize: 18)
-        postName.textColor = .white()
+        postName.textColor = .white
         backgroundColor = UIColor(red: 15/255.0, green: 16/255.0, blue: 16/255.0, alpha: 1.0)
     }
 }

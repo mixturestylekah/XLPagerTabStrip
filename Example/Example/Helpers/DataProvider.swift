@@ -37,8 +37,7 @@ class DataProvider {
 
 class NavController: UINavigationController {
     
-    
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
     
@@ -47,10 +46,9 @@ class NavController: UINavigationController {
 
 class TabBarController : UITabBarController {
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
-    
 }
 
 

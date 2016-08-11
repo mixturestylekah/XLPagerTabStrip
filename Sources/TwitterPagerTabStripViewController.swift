@@ -28,10 +28,10 @@ public struct TwitterPagerTabStripSettings {
     
     public struct Style {
         public var dotColor = UIColor(white: 1, alpha: 0.4)
-        public var selectedDotColor = UIColor.white()
+        public var selectedDotColor = UIColor.white
         public var portraitTitleFont = UIFont.systemFont(ofSize: 18)
         public var landscapeTitleFont = UIFont.systemFont(ofSize: 15)
-        public var titleColor = UIColor.white()
+        public var titleColor = UIColor.white
     }
     
     public var style = Style()
@@ -76,7 +76,7 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
 
     public override func reloadPagerTabStripView() {
         super.reloadPagerTabStripView()
-        guard isViewLoaded() else { return }
+        guard isViewLoaded else { return }
         
         reloadNavigationViewItems()
         setNavigationViewItemsPosition(updateAlpha: true)
@@ -156,7 +156,7 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
     
     private lazy var pageControl: FXPageControl = { [unowned self] in
         let pageControl = FXPageControl()
-        pageControl.backgroundColor = .clear()
+        pageControl.backgroundColor = .clear
         pageControl.dotSize = 3.8
         pageControl.dotSpacing = 4.0
         pageControl.dotColor = self.settings.style.dotColor
@@ -177,7 +177,7 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
             let navTitleLabel : UILabel = {
                 let label = UILabel()
                 label.text = indicatorInfo.title
-                label.font = UIApplication.shared().statusBarOrientation.isPortrait ? settings.style.portraitTitleFont : settings.style.landscapeTitleFont
+                label.font = UIApplication.shared.statusBarOrientation.isPortrait ? settings.style.portraitTitleFont : settings.style.landscapeTitleFont
                 label.textColor = settings.style.titleColor
                 label.alpha = 0
                 return label
@@ -191,14 +191,14 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
     
     private func setNavigationViewItemsPosition(updateAlpha: Bool) {
         let distance = distanceValue
-        let isPortrait = UIApplication.shared().statusBarOrientation.isPortrait
+        let isPortrait = UIApplication.shared.statusBarOrientation.isPortrait
         let navBarHeight: CGFloat = navigationController!.navigationBar.frame.size.height
         for (index, label) in childTitleLabels.enumerated() {
             if updateAlpha {
                 label.alpha = currentIndex == index ? 1 : 0
             }
             label.font = isPortrait ? settings.style.portraitTitleFont : settings.style.landscapeTitleFont
-            let viewSize = label.intrinsicContentSize()
+            let viewSize = label.intrinsicContentSize
             let originX = distance - viewSize.width/2 + CGFloat(index) * distance
             let originY = (CGFloat(navBarHeight) - viewSize.height) / 2
             label.frame = CGRect(x: originX, y: originY - 2, width: viewSize.width, height: viewSize.height)
