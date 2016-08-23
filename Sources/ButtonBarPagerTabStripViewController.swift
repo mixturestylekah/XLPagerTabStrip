@@ -77,8 +77,8 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         return labelSize.width + (self?.settings.style.buttonBarItemLeftRightMargin ?? 8) * 2
     })
     
-    public var changeCurrentIndex: ((oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, animated: Bool) -> Void)?
-    public var changeCurrentIndexProgressive: ((oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void)?
+    public var changeCurrentIndex: ((_ oldCell: ButtonBarViewCell?, _ newCell: ButtonBarViewCell?, _ animated: Bool) -> Void)?
+    public var changeCurrentIndexProgressive: ((_ oldCell: ButtonBarViewCell?, _ newCell: ButtonBarViewCell?, _ progressPercentage: CGFloat, _ changeCurrentIndex: Bool, _ animated: Bool) -> Void)?
     
     @IBOutlet public lazy var buttonBarView: ButtonBarView! = { [unowned self] in
         var flowLayout = UICollectionViewFlowLayout()
@@ -213,7 +213,7 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         if let changeCurrentIndex = changeCurrentIndex {
             let oldCell = buttonBarView.cellForItem(at: IndexPath(item: currentIndex != fromIndex ? fromIndex : toIndex, section: 0)) as? ButtonBarViewCell
             let newCell = buttonBarView.cellForItem(at: IndexPath(item: currentIndex, section: 0)) as? ButtonBarViewCell
-            changeCurrentIndex(oldCell: oldCell, newCell: newCell, animated: true)
+            changeCurrentIndex(oldCell, newCell, true)
         }
     }
     
@@ -223,7 +223,7 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
             let oldCell = buttonBarView.cellForItem(at: IndexPath(item: currentIndex != fromIndex ? fromIndex : toIndex, section: 0)) as? ButtonBarViewCell
             let newCell = buttonBarView.cellForItem(at: IndexPath(item: currentIndex, section: 0)) as? ButtonBarViewCell
-            changeCurrentIndexProgressive(oldCell: oldCell, newCell: newCell, progressPercentage: progressPercentage, changeCurrentIndex: indexWasChanged, animated: true)
+            changeCurrentIndexProgressive(oldCell, newCell, progressPercentage, indexWasChanged, true)
         }
     }
     
@@ -246,12 +246,12 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         let newCell = buttonBarView.cellForItem(at: IndexPath(item: indexPath.item, section: 0)) as? ButtonBarViewCell
         if pagerBehaviour.isProgressiveIndicator {
             if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
-                changeCurrentIndexProgressive(oldCell: oldCell, newCell: newCell, progressPercentage: 1, changeCurrentIndex: true, animated: true)
+                changeCurrentIndexProgressive(oldCell, newCell, 1, true, true)
             }
         }
         else {
             if let changeCurrentIndex = changeCurrentIndex {
-                changeCurrentIndex(oldCell: oldCell, newCell: newCell, animated: true)
+                changeCurrentIndex(oldCell, newCell, true)
             }
         }
         moveToViewController(at: indexPath.item)
@@ -286,12 +286,12 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         
         if pagerBehaviour.isProgressiveIndicator {
             if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
-                changeCurrentIndexProgressive(oldCell: currentIndex == indexPath.item ? nil : cell, newCell: currentIndex == indexPath.item ? cell : nil, progressPercentage: 1, changeCurrentIndex: true, animated: false)
+                changeCurrentIndexProgressive(currentIndex == indexPath.item ? nil : cell, currentIndex == indexPath.item ? cell : nil, 1, true, false)
             }
         }
         else {
             if let changeCurrentIndex = changeCurrentIndex {
-                changeCurrentIndex(oldCell: currentIndex == indexPath.item ? nil : cell, newCell: currentIndex == indexPath.item ? cell : nil, animated: false)
+                changeCurrentIndex(currentIndex == indexPath.item ? nil : cell, currentIndex == indexPath.item ? cell : nil, false)
             }
         }
         return cell

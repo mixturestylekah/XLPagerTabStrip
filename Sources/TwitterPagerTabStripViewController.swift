@@ -112,15 +112,15 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
         pageControl.currentPage = currentIndex
     }
     
-    public override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
-        guard object === titleView && keyPath == "frame" && change?[NSKeyValueChangeKey.kindKey] as? UInt == NSKeyValueChange.setting.rawValue else { return }
-        let oldRect = change![NSKeyValueChangeKey.oldKey]!.cgRectValue
-        let newRect = change![NSKeyValueChangeKey.oldKey]!.cgRectValue
-        if ((oldRect?.equalTo(newRect!)) != nil) {
-            titleScrollView.frame = CGRect(x: 0, y: 0, width: titleView.frame.width, height: titleScrollView.frame.height)
-            setNavigationViewItemsPosition(updateAlpha: true)
-        }
-    }
+//    public override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
+//        guard object === titleView && keyPath == "frame" && change?[NSKeyValueChangeKey.kindKey] as? UInt == NSKeyValueChange.setting.rawValue else { return }
+//        let oldRect = change![NSKeyValueChangeKey.oldKey]!.cgRectValue
+//        let newRect = change![NSKeyValueChangeKey.oldKey]!.cgRectValue
+//        if ((oldRect?.equalTo(newRect!)) != nil) {
+//            titleScrollView.frame = CGRect(x: 0, y: 0, width: titleView.frame.width, height: titleScrollView.frame.height)
+//            setNavigationViewItemsPosition(updateAlpha: true)
+//        }
+//    }
     
     deinit {
         titleView.removeObserver(self, forKeyPath: "frame")
