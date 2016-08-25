@@ -64,7 +64,7 @@ public struct ButtonBarPagerTabStripSettings {
     public var style = Style()
 }
 
-public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripIsProgressiveDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripIsProgressiveDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     public var settings = ButtonBarPagerTabStripSettings()
     
@@ -111,7 +111,7 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         datasource = self
     }
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         if buttonBarView.superview == nil {
@@ -146,12 +146,12 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         //-
     }
     
-    public override func viewWillAppear(_ animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         buttonBarView.layoutIfNeeded()
     }
     
-    public override func viewDidLayoutSubviews() {
+    open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         guard isViewAppearing || isViewRotating else { return }
@@ -229,7 +229,7 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
     
     // MARK: - UICollectionViewDelegateFlowLayut
     
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         guard let cellWidthValue = cachedCellWidths?[indexPath.row] else {
             fatalError("cachedCellWidths for \(indexPath.row) must not be nil")
         }

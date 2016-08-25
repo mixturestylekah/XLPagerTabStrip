@@ -51,7 +51,7 @@ public protocol PagerTabStripDataSource: class {
 
 //MARK: PagerTabStripViewController
 
-public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
+open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet lazy public var containerView: UIScrollView! = { [unowned self] in
         let containerView = UIScrollView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height))
@@ -89,7 +89,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         return .none
     }
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         if containerView.superview == nil {
             view.addSubview(containerView)
@@ -105,19 +105,19 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         reloadViewControllers()
     }
     
-    public override func viewWillAppear(_ animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         isViewAppearing = true
     }
     
-    override public func viewDidAppear(_ animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         lastSize = containerView.bounds.size
         updateIfNeeded()
         isViewAppearing = false
     }
     
-    override public func viewDidLayoutSubviews(){
+    override open func viewDidLayoutSubviews(){
         super.viewDidLayoutSubviews()
         updateIfNeeded()
     }
@@ -151,7 +151,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
 
     
     //MARK: - PagerTabStripDataSource
-    public func viewControllers(for pagerTabStripController:PagerTabStripViewController) -> [UIViewController]{
+    open func viewControllers(for pagerTabStripController:PagerTabStripViewController) -> [UIViewController]{
         assertionFailure("Sub-class must implement the PagerTabStripDataSource viewControllersForPagerTabStrip: method")
         return []
     }
@@ -302,7 +302,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
     
     //MARK: - Orientation
     
-    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         isViewRotating = true
         pageBeforeRotate = currentIndex
