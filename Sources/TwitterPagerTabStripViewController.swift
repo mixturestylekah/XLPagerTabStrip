@@ -37,7 +37,10 @@ public struct TwitterPagerTabStripSettings {
     public var style = Style()
 }
 
-public class TwitterPagerTabStripViewController: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripIsProgressiveDelegate {
+open class TwitterPagerTabStripViewController: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripIsProgressiveDelegate {
+
+    open func pagerTabStripViewController(_ pagerTabStripViewController: PagerTabStripViewController, didMoveToIndex: Int, viewController: UIViewController?) {
+    }
     
     public var settings = TwitterPagerTabStripSettings()
     
@@ -55,7 +58,7 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
         datasource = self
     }
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         if titleView.superview == nil {
@@ -126,7 +129,7 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
         titleView.removeObserver(self, forKeyPath: "frame")
     }
     
-    public override func viewDidLayoutSubviews() {
+    open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setNavigationViewItemsPosition(updateAlpha: false)
     }

@@ -66,6 +66,10 @@ public struct ButtonBarPagerTabStripSettings {
 
 open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripIsProgressiveDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    open func pagerTabStripViewController(_ pagerTabStripViewController: PagerTabStripViewController, didMoveToIndex: Int, viewController: UIViewController?) {
+        
+    }
+    
     public var settings = ButtonBarPagerTabStripSettings()
     
     lazy public var buttonBarItemSpec: ButtonBarItemSpec<ButtonBarViewCell> = .nibFile(nibName: "ButtonCell", bundle: Bundle(for: ButtonBarViewCell.self), width:{ [weak self] (childItemInfo) -> CGFloat in
@@ -176,7 +180,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     
     // MARK: - Public Methods
     
-    public override func reloadPagerTabStripView() {
+    open override func reloadPagerTabStripView() {
         super.reloadPagerTabStripView()
         guard isViewLoaded else { return }
         buttonBarView.reloadData()
@@ -306,7 +310,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         shouldUpdateButtonBarView = true
     }
     
-    public func configure(cell: ButtonBarViewCell, indicatorInfo: IndicatorInfo){
+    open func configure(cell: ButtonBarViewCell, indicatorInfo: IndicatorInfo){
     }
     
     private func calculateWidths() -> [CGFloat] {

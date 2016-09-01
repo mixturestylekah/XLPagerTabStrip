@@ -75,4 +75,9 @@ class ButtonBarExampleViewController: ButtonBarPagerTabStripViewController {
         }
         super.reloadPagerTabStripView()
     }
+    
+    override func pagerTabStripViewController(_ pagerTabStripViewController: PagerTabStripViewController, didMoveToIndex: Int, viewController: UIViewController?) {
+        print(viewController)
+        print(didMoveToIndex)
+    }
 }

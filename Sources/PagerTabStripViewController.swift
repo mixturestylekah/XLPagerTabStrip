@@ -36,6 +36,7 @@ public protocol IndicatorInfoProvider {
 public protocol PagerTabStripDelegate: class {
     
     func pagerTabStripViewController(_ pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFrom: Int, to: Int)
+    func pagerTabStripViewController(_ pagerTabStripViewController: PagerTabStripViewController, didMoveToIndex: Int, viewController: UIViewController?)
 }
 
 public protocol PagerTabStripIsProgressiveDelegate : PagerTabStripDelegate {
@@ -293,10 +294,26 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
     }
     
     public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        
+        notifiyMoveToIndex(scrollView: scrollView)
+        
         if containerView == scrollView {
             pagerTabStripChildViewControllersForScrolling = nil
             (navigationController?.view ?? view).isUserInteractionEnabled = true
             updateContent()
+        }
+    }
+    
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        notifiyMoveToIndex(scrollView: scrollView)
+    }
+    
+    func notifiyMoveToIndex(scrollView: UIScrollView) {
+        if containerView == scrollView {
+            let toIndex = pageForContentOffset(scrollView.contentOffset.x)
+            if toIndex != lastPageNumber {
+                self.delegate?.pagerTabStripViewController(self, didMoveToIndex: toIndex, viewController: viewControllers[toIndex])
+            }
         }
     }
     

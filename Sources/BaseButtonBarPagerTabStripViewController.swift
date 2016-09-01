@@ -24,8 +24,12 @@
 
 import Foundation
 
-public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UICollectionViewCell>: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripIsProgressiveDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
-
+open class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UICollectionViewCell>: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripIsProgressiveDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    open func pagerTabStripViewController(_ pagerTabStripViewController: PagerTabStripViewController, didMoveToIndex: Int, viewController: UIViewController?) {
+        
+    }
+    
     public var settings = ButtonBarPagerTabStripSettings()
     public var buttonBarItemSpec: ButtonBarItemSpec<ButtonBarCellType>!
     public var changeCurrentIndex: ((_ oldCell: ButtonBarCellType?, _ newCell: ButtonBarCellType?, _ animated: Bool) -> Void)?
@@ -64,7 +68,7 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
         datasource = self
     }
 
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
 
         if buttonBarView.superview == nil {
@@ -98,18 +102,18 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
         //-
     }
 
-    public override func viewWillAppear(_ animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         buttonBarView.layoutIfNeeded()
         isViewAppearing = true
     }
 
-    public override func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         isViewAppearing = false
     }
 
-    public override func viewDidLayoutSubviews() {
+    open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
         guard isViewAppearing || isViewRotating else { return }
@@ -134,7 +138,7 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
 
     // MARK: - View Rotation
 
-    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
     }
 
@@ -172,7 +176,7 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
         return calculateStretchedCellWidths(minimumCellWidths, suggestedStretchedCellWidth: newSuggestedStretchedCellWidth, previousNumberOfLargeCells: numberOfLargeCells)
     }
 
-    public func pagerTabStripViewController(_ pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFrom fromIndex: Int, to toIndex: Int) {
+    open func pagerTabStripViewController(_ pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFrom fromIndex: Int, to toIndex: Int) {
         guard shouldUpdateButtonBarView else { return }
         buttonBarView.moveToIndex(toIndex, animated: true, swipeDirection: toIndex < fromIndex ? .right : .left, pagerScroll: .yes)
 
@@ -183,7 +187,7 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
         }
     }
 
-    public func pagerTabStripViewController(_ pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFrom fromIndex: Int, to toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) {
+    open func pagerTabStripViewController(_ pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFrom fromIndex: Int, to toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) {
         guard shouldUpdateButtonBarView else { return }
         buttonBarView.moveFromIndex(fromIndex, toIndex: toIndex, progressPercentage: progressPercentage, pagerScroll: .yes)
         if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
@@ -261,7 +265,7 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
         shouldUpdateButtonBarView = true
     }
 
-    public func configure(cell: ButtonBarCellType, indicatorInfo: IndicatorInfo){
+    open func configure(cell: ButtonBarCellType, indicatorInfo: IndicatorInfo){
         fatalError("You must override this method to set up ButtonBarView cell accordingly")
     }
 

@@ -38,8 +38,8 @@ class PostCell: UITableViewCell {
     
     
     func configureWithData(_ data: NSDictionary){
-        postName.text = data["post"]!["user"]!!["name"] as? String
-        postText.text = data["post"]!["text"] as? String
+//        postName.text = data["post"]!["user"]!!["name"] as? String
+//        postText.text = data["post"]!["text"] as? String
         userImage.image = UIImage(named: postName.text!.replacingOccurrences(of: " ", with: "_"))
     }
     
